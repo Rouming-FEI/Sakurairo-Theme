@@ -59,7 +59,7 @@ $reception_background = iro_opt('reception_background');
             </div>
           <?php endif; ?>
         <a href="https://github.com/mirai-mamori/Sakurairo" rel="noopener" target="_blank">Theme Sakurairo</a>
-        <span>adapted by Rouming</span>
+        <span><a href="https://github.com/Rouming-FEI/Sakurairo-Theme" rel="noopener" target="_blank">adapted by Rouming</a></span>
       </div>
     </div><!-- .site-info -->
   </footer><!-- #colophon -->
