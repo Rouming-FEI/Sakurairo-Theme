@@ -186,7 +186,7 @@
   margin: 0;
 }
 
-.mobile-nav .menu > li {
+.mobile-nav .menu>li {
   align-items: center;
   padding: 10px;
   margin-right: 8px;
@@ -196,7 +196,7 @@
   transition: color 0.3s;
 }
 
-.mobile-nav .menu > li:hover {
+.mobile-nav .menu>li:hover {
   color: var(--theme-skin-matching);
 }
 
@@ -378,6 +378,7 @@
     min-height: 14rem;
     height: 14rem;
   }
+
   .comments {
     padding: 4% 0 0;
     padding-bottom: 80px;
@@ -419,6 +420,7 @@
 
 /* 880px 断点适配 */
 @media (max-width: 880px) {
+
   /* 评论相关样式 */
   .comment {
     .comment-reply-link {
@@ -494,6 +496,7 @@
 
 /* 860px 断点适配 */
 @media (max-width: 860px) {
+
   /* Pattern Center 相关 */
   .pattern-center {
     header.single-header {
@@ -728,6 +731,7 @@
 }
 
 @media (min-width: 860px) {
+
   .mo-toc-button,
   .mo-navbar,
   .mo-nav-button,
