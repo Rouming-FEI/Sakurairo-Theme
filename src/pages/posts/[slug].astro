@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import GiscusComments from "../../components/GiscusComments.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={`${post.data.title} | Sakurairo Astro`} description={post.data.description}>
+  <article class="article-shell">
+    <header>
+      <h1>{post.data.title}</h1>
+      <p class="post-card-meta">发布于 {post.data.publishDate.toLocaleDateString("zh-CN")}</p>
+    </header>
+    <Content />
+  </article>
+  <GiscusComments />
+</BaseLayout>

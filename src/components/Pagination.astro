@@ -1,0 +1,26 @@
+---
+interface Props {
+  current: number;
+  total: number;
+  basePath: string;
+}
+
+const { current, total, basePath } = Astro.props;
+
+const normalize = (value: number) => {
+  if (value <= 1) return basePath;
+  return `${basePath.replace(/\/$/, "")}/page/${value}`;
+};
+---
+
+{total > 1 && (
+  <nav class="pagination" aria-label="分页导航">
+    <a href={normalize(current - 1)} aria-disabled={current <= 1} class:list={{ disabled: current <= 1 }}>
+      上一页
+    </a>
+    <span>{current} / {total}</span>
+    <a href={normalize(current + 1)} aria-disabled={current >= total} class:list={{ disabled: current >= total }}>
+      下一页
+    </a>
+  </nav>
+)}

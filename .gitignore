@@ -1,2 +1,8 @@
 tempCodeRunnerFile.php
 .vscode
+node_modules/
+.astro/
+dist/
+.env
+.env.*
+*.log

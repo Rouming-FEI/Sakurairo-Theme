@@ -1,0 +1,25 @@
+---
+import { siteConfig } from "../config/site";
+
+const current = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-brand" href="/">{siteConfig.title}</a>
+    <nav aria-label="主导航">
+      <ul class="nav-list">
+        {siteConfig.nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={{ "is-active": current === item.href }}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>

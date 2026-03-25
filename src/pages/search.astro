@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="搜索 | Sakurairo Astro" description="文章搜索">
+  <section class="article-shell">
+    <h1>搜索</h1>
+    <input id="search-box" class="search-box" type="search" placeholder="输入标题、描述或标签" />
+    <ul id="search-result" class="search-result"></ul>
+  </section>
+
+  <script>
+    const input = document.getElementById("search-box");
+    const list = document.getElementById("search-result");
+
+    const render = (items) => {
+      if (!list) return;
+      if (items.length === 0) {
+        list.innerHTML = "<li>没有匹配结果</li>";
+        return;
+      }
+
+      list.innerHTML = items
+        .map(
+          (item) =>
+            `<li><a href="${item.url}">${item.title}</a><p>${item.description || ""}</p></li>`
+        )
+        .join("");
+    };
+
+    const load = async () => {
+      const response = await fetch("/search-data.json");
+      const data = await response.json();
+      render(data);
+
+      if (!input) return;
+      input.addEventListener("input", () => {
+        const q = String(input.value || "").trim().toLowerCase();
+        if (!q) {
+          render(data);
+          return;
+        }
+
+        const filtered = data.filter((item) => {
+          const text = `${item.title} ${item.description} ${(item.tags || []).join(" ")}`.toLowerCase();
+          return text.includes(q);
+        });
+        render(filtered);
+      });
+    };
+
+    load();
+  </script>
+</BaseLayout>

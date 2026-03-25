@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../config/site";
+---
+
+<BaseLayout title="关于 | Sakurairo Astro" description="关于作者与博客主题信息">
+  <article class="article-shell about-page-wrapper">
+    <header>
+      <h1>关于我</h1>
+    </header>
+
+    <div class="about-profile">
+      <div class="about-avatar">
+        <img src={siteConfig.author.avatar} alt={siteConfig.author.name} width="200" height="200" />
+      </div>
+      <div class="about-info">
+        <h2>{siteConfig.author.name}</h2>
+        <div class="about-description">
+          <p>{siteConfig.author.bio}</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="about-divider" />
+
+    <div class="about-main-content">
+      <p>这个页面来源于原主题 user/template-about.php 的结构迁移，保留了头像、作者信息与正文区块。</p>
+      <p>后续你可以把这里改为读取 Markdown 或 CMS 内容，继续贴近 WordPress 原数据模型。</p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .about-page-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .about-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .about-avatar img {
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .about-avatar img:hover {
+    transform: rotate(360deg);
+  }
+
+  .about-info h2 {
+    margin-top: 20px;
+    font-size: 2em;
+  }
+
+  .about-description {
+    color: #666;
+    margin-top: 10px;
+  }
+
+  .about-divider {
+    border: 0;
+    height: 1px;
+    margin: 40px 0;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+  }
+
+  @media (max-width: 760px) {
+    .about-info h2 {
+      font-size: 1.58em;
+    }
+  }
+</style>

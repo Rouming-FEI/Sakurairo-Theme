@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getPublishedPosts, getCategoryMap, slugifyTerm } from "../../lib/posts";
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const categories = [...getCategoryMap(posts).keys()];
+
+  return categories.map((category) => ({
+    params: { category: slugifyTerm(category) },
+    props: { category }
+  }));
+}
+
+const { category } = Astro.props;
+const posts = await getPublishedPosts();
+const categoryMap = getCategoryMap(posts);
+const list = categoryMap.get(category) ?? [];
+---
+
+<BaseLayout title={`${category} | 分类`} description={`${category} 分类下的文章列表`}>
+  <section class="hero">
+    <h1>分类: {category}</h1>
+    <p>共 {list.length} 篇文章</p>
+  </section>
+  <section class="post-list" aria-label="分类文章列表">
+    {list.map((post) => (
+      <PostCard
+        href={`/posts/${post.slug}`}
+        title={post.data.title}
+        description={post.data.description}
+        publishDate={post.data.publishDate}
+        tags={post.data.tags}
+      />
+    ))}
+  </section>
+</BaseLayout>
